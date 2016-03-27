@@ -1,0 +1,127 @@
+//colors
+$holecolor: lighten(black, 90%);
+$piecetextcolor: white;
+$player1: red;
+$player2: blue;
+$player1inactive: lighten($player1, 35%);
+$player2inactive: lighten($player2, 35%);
+$usedpiece: #555;
+
+//borders
+$border: black 0.5vh solid;
+
+body {
+  display: flex;
+  margin: 0;
+}
+
+@mixin pseudo-piece($n) {
+  &::before {
+    font-size: 10vh;
+    color: $piecetextcolor;
+    display: block;
+    width: 16vh;
+    height: 16vh;
+    vertical-align: middle;
+    text-align: center;
+    content: "#{$n}";
+  }
+  & {
+    line-height: 16vh;
+  }
+}
+
+#gamearea {
+  width: 60vw;
+  margin: 2vh auto;
+  display: flex;
+  flex-direction: column;
+
+  &.turnp1 .hole:hover:not(.filled){
+    background-color: lighten($player1, 30%)
+  }
+  &.turnp2 .hole:hover:not(.filled){
+    background-color: lighten($player2, 30%)
+  }
+}
+
+.row {
+  height: 16vh;
+  display: flex;
+  &::after, &::before {
+    margin: auto;
+    content: " ";
+    display: block;
+  }
+}
+
+.hole {
+  width: 16vh;
+  height: 16vh;
+  background-color: $holecolor;
+  border: $border;
+  border-radius: 50%;
+  margin: auto 1vh;
+}
+
+.piecearea {
+  width: 20vw;
+  height: 95vh;
+  display: flex;
+  flex-flow: row wrap;
+  margin: auto;
+  border-radius: 2vw;
+}
+
+#player1 {
+  background-color: lighten($player1, 45%);
+}
+
+#player2 {
+  background-color: lighten($player2, 45%);
+}
+
+.piece {
+  width: 16vh;
+  height: 16vh;
+  border: $border;
+  border-radius: 50%;
+  margin: auto;
+}
+
+.p1 {
+  background: $player1;
+  &.inactive {
+    background: $player1inactive;
+  }
+}
+.p2 {
+  background: $player2;
+  &.inactive {
+    background: $player2inactive;
+  }
+}
+
+.used {
+  background-color: $usedpiece;
+}
+
+.blackHole {
+  background: black;
+}
+
+.sucked {
+  background: black;
+  &.p1::before {
+    color: $player1;
+  }
+  &.p2::before {
+    color: $player2;
+  }
+}
+
+@for $i from 1 through 10 {
+  .piece-#{$i} {
+    @include pseudo-piece($i);
+  }
+}
