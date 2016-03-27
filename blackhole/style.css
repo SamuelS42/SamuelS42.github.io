@@ -1,0 +1,17 @@
+html {
+  text-align: center;
+}
+
+#footer {
+  text-align: left;
+  position: absolute;
+  bottom: 1vh;
+}
+
+#play {
+  width: 10vw;
+  height: 4vh;
+  background: blue;
+  color: white;
+  margin: 0 auto;
+}
